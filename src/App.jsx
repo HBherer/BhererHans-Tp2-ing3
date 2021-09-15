@@ -1,13 +1,15 @@
 import React from "react";
 import CardScreen from "./Project/CardScreen";
-import HeaderBar from "./Project/Components/HeaderBar";
+import HeaderPage from "./Project/Components/HeaderPage";
+import FooterPage from "./Project/Components/FooterPage";
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <HeaderBar title="The Cat API" />
+        <HeaderPage title="The Cat API" />
         <CardScreen></CardScreen>
+        <FooterPage></FooterPage>
       </div>
     );
   }

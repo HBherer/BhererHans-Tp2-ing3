@@ -12,13 +12,16 @@ import CardActions from '@material-ui/core/CardActions';
 
 const CardScreen = () => {
     const [cats, setCats] = useState([]);
+    const [pageCountMax, setPageCountMax] = useState()
     const [pages, setPages] = useState(1);
     const handleChange = (event, value) => {
         setPages(value);
     };
     useEffect(() => {
         const updateCatsValue = async () => {
-            setCats(await fetchCats(pages));
+            const catsAndPaggination = fetchCats(pages);
+            setPageCountMax((await catsAndPaggination).limitPages);
+            setCats((await catsAndPaggination).cats);
         };
         updateCatsValue();
     }, [pages]);
@@ -26,7 +29,7 @@ const CardScreen = () => {
         root: {
             maxWidth: 345,
         },
-        root1: {
+        roota: {
             '& > *': {
                 marginTop: theme.spacing(2),
             },
@@ -36,24 +39,21 @@ const CardScreen = () => {
         },
     }));
     const classes = useStyles();
-    const download = () => {
-
-    };
     return (
         <>
             <div className="paginationNum">
-                <div className={classes.root1}>
-                    <Pagination count={1309} page={pages} onChange={handleChange} />
+                <div className={classes.roota}>
+                    <Pagination count={pageCountMax} page={pages} onChange={handleChange} />
                 </div>
             </div>
             <div className="container">
                 {cats.map((cat) => (
-                    <div className="card-bg">
+                    <div className="card-bg" key={cat.id}>
                         <Card className={classes.root}>
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image={cat.url} key={cat.id}
+                                    image={cat.url}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
@@ -62,12 +62,9 @@ const CardScreen = () => {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <form action={cat.url} target="_blank">
-                                    <Button component="Button" size="small" color="primary">
-                                        Voir
-                                    </Button>
-                                </form>
-
+                                <Button href={cat.url} type="button" target="_blank" variant="outlined" size="small" color="primary">
+                                    Voir
+                                </Button>
                             </CardActions>
                         </Card>
                     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-class HeaderBar extends React.Component {
+class HeaderPage extends React.Component {
     render() {
         return (
             <div className="header">
@@ -10,4 +10,4 @@ class HeaderBar extends React.Component {
     }
 }
 
-export default HeaderBar;
+export default HeaderPage;

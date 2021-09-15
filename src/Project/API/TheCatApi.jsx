@@ -7,10 +7,16 @@ const fetchCats = async (page) => {
             "x-api-key": "091bbe8c-9223-46cb-b7c5-92331c2cfe2b",
         },
     });
-    //const paginationCount = response.headers.get("Pagination-count");
-    //const limitPages = Math.floor(paginationCount / limit)
 
-    return response.json();
+    const paginationCount = response.headers.get("Pagination-count");
+    const limitPages = Math.floor(paginationCount / limit)
+
+    const cats = await response.json();
+
+    return {
+        cats,
+        limitPages,
+    }
 }
 
-export { fetchCats }; 
+export { fetchCats };
