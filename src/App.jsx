@@ -6,11 +6,11 @@ import FooterPage from "./Project/Components/FooterPage";
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <HeaderPage title="The Cat API" />
         <CardScreen></CardScreen>
         <FooterPage></FooterPage>
-      </div>
+      </>
     );
   }
 }
